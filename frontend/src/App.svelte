@@ -1,8 +1,7 @@
 <script>
   import logo from './assets/svelte.png';
-  import { Socket } from 'socket.io-client';
 
-  export let socket: Socket;
+  export let socket;
   export let status = 'waiting';
 
   socket.on('pong', () => {
