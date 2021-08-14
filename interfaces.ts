@@ -25,15 +25,11 @@ export interface ClientAnswerEvent {
 }
 
 export interface ServerScoreEvent {
-  scores: {
-    [id: string]: AnswerCorrectness;
-  }
+  scores: RoundScores;
 }
 
 export interface ServerFinishEvent {
-  scores: {
-    [id: string]: Record<AnswerCorrectness, number>;
-  }
+  scores: FinalScores;
 }
 
 export interface Lobby {
@@ -56,6 +52,14 @@ export interface Answer {
   value: string;
 }
 
+export interface RoundScores {
+  [id: string]: AnswerCorrectness;
+}
+
+export interface FinalScores {
+  [id: string]: Record<AnswerCorrectness, number>;
+}
+
 export enum SocketEvent {
   serverRoom = 'room',
   serverQuestion = 'question',
@@ -69,5 +73,7 @@ export enum SocketEvent {
 }
 
 export enum AnswerCorrectness {
-  correct, wrong, unanswered
+  correct = 'correct',
+  wrong = 'wrong',
+  unanswered = 'unanswered',
 }

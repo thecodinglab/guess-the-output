@@ -2,6 +2,8 @@ import {createServer} from 'http';
 import {Server, Socket} from 'socket.io';
 import {AddressInfo} from 'net';
 import {logger} from './logger';
+import { GameManager } from './game/manager';
+import { Client } from './game/client';
 
 const port = process.env.PORT || 3000;
 
@@ -24,15 +26,18 @@ const shutdown = () => {
 process.on('SIGINT', shutdown);
 process.on('SIGTERM', shutdown);
 
+
+const gameManager = new GameManager(io);
+
 io.on('connection', (socket: Socket) => {
   const addr = socket.handshake.address;
   const clientLogger = logger.child({client: addr});
 
   clientLogger.info(`client connected`);
 
-  socket.on('ping', (...args) => {
-    socket.emit('pong', ...args);
-  });
+  const client = new Client(socket, gameManager);
+
+  socket.onAny((...args) => clientLogger.info(JSON.stringify(args)));
 
   socket.on('disconnect', () => {
     clientLogger.info(`client disconnected`);
