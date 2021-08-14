@@ -1,6 +1,7 @@
-import { createServer } from "http";
-import { Server, Socket } from "socket.io";
-import { AddressInfo } from "net";
+import {createServer} from 'http';
+import {Server, Socket} from 'socket.io';
+import {AddressInfo} from 'net';
+import {logger} from './logger';
 
 const port = process.env.PORT || 3000;
 
@@ -12,7 +13,7 @@ const io = new Server(server, {
 });
 
 const shutdown = () => {
-  console.log('shutting down application...');
+  logger.info(`shutting down application...`);
 
   io.close();
   server.close();
@@ -24,12 +25,21 @@ process.on('SIGINT', shutdown);
 process.on('SIGTERM', shutdown);
 
 io.on('connection', (socket: Socket) => {
+  const addr = socket.handshake.address;
+  const clientLogger = logger.child({client: addr});
+
+  clientLogger.info(`client connected`);
+
   socket.on('ping', (...args) => {
     socket.emit('pong', ...args);
+  });
+
+  socket.on('disconnect', () => {
+    clientLogger.info(`client disconnected`);
   });
 });
 
 server.listen(port, () => {
   const addr = server.address() as AddressInfo;
-  console.log('server listening on [%s]:%d', addr.address, addr.port);
+  logger.info(`server listening on [${addr.address}]:${addr.port}`);
 });
