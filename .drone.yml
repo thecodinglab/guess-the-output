@@ -17,6 +17,33 @@ steps:
       password:
         from_secret: github_token
 
+trigger:
+  branch:
+  - main
+
+---
+kind: pipeline
+type: kubernetes
+name: publish-frontend
+
+steps:
+  - name: publish
+    image: plugins/docker
+    settings:
+      context: frontend
+      dockerfile: frontend/Dockerfile
+      registry: ghcr.io
+      repo: ghcr.io/thecodinglab/guess-the-output/frontend
+      tags: latest
+      username:
+        from_secret: github_username
+      password:
+        from_secret: github_token
+
+trigger:
+  branch:
+  - main
+
 ---
 kind: pipeline
 type: ssh
@@ -39,9 +66,14 @@ steps:
 
 depends_on:
   - publish-backend
+  - publish-frontend
+
+trigger:
+  branch:
+  - main
 
 ---
 kind: signature
-hmac: 7700f429ab380a2c088a259db66c8c1a0a944a0ca85bf679fc3170344da272ae
+hmac: 672f67f1066ff423039a7b5a62afe573d6fb64c0f3e63ca878c85e45c988558f
 
 ...

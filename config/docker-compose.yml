@@ -4,6 +4,7 @@ services:
   caddy:
     container_name: caddy
     image: caddy:2
+    restart: unless-stopped
     volumes:
       - ./Caddyfile:/etc/caddy/Caddyfile
     ports:
@@ -13,4 +14,9 @@ services:
   backend:
     container_name: backend
     image: ghcr.io/thecodinglab/guess-the-output/backend:latest
+    restart: unless-stopped
+  
+  frontend:
+    container_name: frontend
+    image: ghcr.io/thecodinglab/guess-the-output/frontend:latest
     restart: unless-stopped
