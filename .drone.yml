@@ -10,7 +10,7 @@ steps:
       context: backend
       dockerfile: backend/Dockerfile
       registry: ghcr.io
-      repo: thecodinglab/guess-the-output/backend
+      repo: ghcr.io/thecodinglab/guess-the-output/backend
       tags: latest
       username:
         from_secret: github_username
