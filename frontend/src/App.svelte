@@ -37,7 +37,7 @@
   socket.onAny(console.log);
 </script>
 
-<section class="h-screen bg-gray-800 text-white body-font flex justify-center items-center">
+<section class="min-h-screen bg-gray-800 text-white body-font flex justify-center items-center">
   <div class="container mx-auto flex px-5 py-24 items-center justify-center flex-col">
     <div class="text-center lg:w-2/3 w-full">
       {#if lobby}
