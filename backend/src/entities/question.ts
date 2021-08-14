@@ -17,13 +17,28 @@ export class QuestionRepository {
   list(): Question[] {
     return [
       {
-        id: 'awd',
+        id: 'js',
         language: 'javascript',
         snippet: `console.log('Hello, World!')`,
         options: [
-          { id: 'awd', value: 'Hello, World!' },
+          { id: 'a', value: 'Hello, World!' },
+          { id: 'b', value: 'Ananas' },
+          { id: 'c', value: 'Banane' },
+          { id: 'd', value: 'Something' },
         ],
-        correct: { id: 'awd', value: 'Hello, World!' },
+        correct: { id: 'a', value: 'Hello, World!' },
+      },
+      {
+        id: 'go',
+        language: 'golang',
+        snippet: `fmt.Println("Hello, World!")`,
+        options: [
+          { id: 'a', value: 'Hello, World!' },
+          { id: 'b', value: 'Ananas' },
+          { id: 'c', value: 'Banane' },
+          { id: 'd', value: 'Something' },
+        ],
+        correct: { id: 'a', value: 'Hello, World!' },
       }
     ];
   }
