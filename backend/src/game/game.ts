@@ -1,3 +1,4 @@
+import  * as hs from "highlight.js";
 import { BroadcastOperator } from "socket.io";
 import { DefaultEventsMap } from "socket.io/dist/typed-events";
 import { StateMachine } from "./state";
@@ -79,10 +80,16 @@ export class Game {
   }
 
   private emitQuestion(): void {
+    let snippet = this.stateMachine.current.snippet;
+    // @ts-ignore
+    if (hs.getLanguage(this.stateMachine.current.language)) {
+      // @ts-ignore
+      snippet = hs.highlight(this.stateMachine.current.snippet, {language: this.stateMachine.current.language}).value;
+    }
     const event: ServerQuestionEvent = {
       question: {
         language: this.stateMachine.current.language,
-        value: this.stateMachine.current.snippet,
+        value: snippet,
         timeout: this.stateMachine.current.timeout,
         answers: this.stateMachine.current.options,
       },
