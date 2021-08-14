@@ -1,9 +1,13 @@
+export interface ClientCreateEvent {
+}
+
 export interface ClientJoinEvent {
   room: string;
   username: string;
 }
 
 export interface ServerRoomEvent {
+  room: string;
   players: Player[];
 }
 
@@ -51,12 +55,16 @@ export interface Answer {
   value: string;
 }
 
-export enum Event {
-  serverScore = 'score',
+export enum SocketEvent {
+  serverRoom = 'room',
   serverQuestion = 'question',
+  serverScore = 'score',
+  serverFinish = 'finish',
+
+  clientCreate = 'create',
   clientJoin = 'join',
-  clientAnswer = 'answer',
   clientReady = 'ready',
+  clientAnswer = 'answer',
 }
 
 export enum AnswerCorrectness {
