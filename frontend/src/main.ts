@@ -1,7 +1,7 @@
 import App from './App.svelte';
 import io from 'socket.io-client';
 
-const socket = io('http://localhost:3000');
+const socket = io('https://guess-the-output.thecodinglab.dev');
 
 export default new App({
   target: document.body,
