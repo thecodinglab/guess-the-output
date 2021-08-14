@@ -47,6 +47,7 @@ export interface Player {
 export interface Question {
   language: string;
   value: string;
+  timeout: number;
   answers: Answer[];
 }
 

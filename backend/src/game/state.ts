@@ -60,7 +60,7 @@ export class StateMachine {
 
     this.current = question[0];
     this.answers = {};
-    this.expiry = moment().add(10, 'seconds');
+    this.expiry = moment().add(this.current.timeout, 'seconds');
 
     return true;
   }

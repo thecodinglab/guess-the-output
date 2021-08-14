@@ -3,6 +3,7 @@ export interface Question {
 
   language: string;
   snippet: string;
+  timeout: number;
 
   options: Answer[];
   correct: Answer;
@@ -20,6 +21,7 @@ export class QuestionRepository {
         id: 'js',
         language: 'javascript',
         snippet: `console.log('Hello, World!')`,
+        timeout: 10,
         options: [
           { id: 'a', value: 'Hello, World!' },
           { id: 'b', value: 'Ananas' },
@@ -32,6 +34,7 @@ export class QuestionRepository {
         id: 'go',
         language: 'golang',
         snippet: `fmt.Println("Hello, World!")`,
+        timeout: 10,
         options: [
           { id: 'a', value: 'Hello, World!' },
           { id: 'b', value: 'Ananas' },

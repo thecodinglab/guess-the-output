@@ -83,6 +83,7 @@ export class Game {
       question: {
         language: this.stateMachine.current.language,
         value: this.stateMachine.current.snippet,
+        timeout: this.stateMachine.current.timeout,
         answers: this.stateMachine.current.options,
       },
     };
