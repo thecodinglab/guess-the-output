@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  caddy:
+    container_name: caddy
+    image: caddy:2
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+    ports:
+      - 80:80
+      - 443:443
+
+  backend:
+    container_name: backend
+    image: ghcr.io/thecodinglab/guess-the-output/backend:latest
+    restart: unless-stopped

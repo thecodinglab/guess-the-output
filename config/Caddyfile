@@ -1,0 +1,13 @@
+guess-the-output.thecodinglab.dev {
+  tls internal
+
+  reverse_proxy /socket.io/* backend:3000 {
+    header_up Host {host}
+    header_up X-Real-IP {remote}
+  }
+
+  log {
+    output stdout
+    level DEBUG
+  }
+}
