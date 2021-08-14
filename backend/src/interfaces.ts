@@ -37,6 +37,7 @@ export interface Lobby {
 }
 
 export interface Player {
+  id: string;
   username: string;
   ready: boolean;
 }

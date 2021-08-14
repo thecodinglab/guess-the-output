@@ -1,4 +1,4 @@
-import { AnswerCorrectness, RoundScores } from "../../../interfaces";
+import { AnswerCorrectness, RoundScores } from "../interfaces";
 import { Player } from "../entities/player";
 import { Answer, Question } from "../entities/question";
 

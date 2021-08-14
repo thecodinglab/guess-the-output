@@ -3,7 +3,7 @@ import { Game } from "./game";
 import { GameManager } from "./manager";
 import { Player } from "../entities/player";
 
-import { ClientAnswerEvent, ClientCreateEvent, ClientJoinEvent, ClientReadyEvent, SocketEvent } from "../../../interfaces";
+import { ClientAnswerEvent, ClientCreateEvent, ClientJoinEvent, ClientReadyEvent, SocketEvent } from "../interfaces";
 
 export class Client {
   private game: Game | null = null;

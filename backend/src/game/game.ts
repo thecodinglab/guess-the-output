@@ -4,7 +4,7 @@ import { StateMachine } from "./state";
 import { Player } from "../entities/player";
 import { Answer } from "../entities/question";
 
-import { ServerFinishEvent, ServerQuestionEvent, ServerRoomEvent, SocketEvent, FinalScores, AnswerCorrectness, ServerScoreEvent } from "../../../interfaces";
+import { ServerFinishEvent, ServerQuestionEvent, ServerRoomEvent, SocketEvent, FinalScores, AnswerCorrectness, ServerScoreEvent } from "../interfaces";
 
 export class Game {
 
@@ -54,6 +54,7 @@ export class Game {
 
   private emitRoom(): void {
     const players = this.stateMachine.players.map((player: Player) => ({
+      id: player.id,
       username: player.username,
       ready: player.ready,
     }));
