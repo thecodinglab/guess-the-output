@@ -38,10 +38,10 @@ export class GameManager {
   }
 
   private generateID(): string {
-    const characters = 'abcdefghijklmnopqrstuvwxyz1234567890';
+    const characters = '1234567890';
 
     let str = '';
-    for (let i = 0; i < 8; i++) {
+    for (let i = 0; i < 6; i++) {
       str += characters[Math.floor(Math.random() * characters.length)];
     }
 
