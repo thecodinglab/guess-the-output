@@ -46,16 +46,18 @@ export class Game {
     this.stateMachine.answer(id, answer);
 
     if (this.stateMachine.allAnswered()) {
-      this.stateMachine.reset();
       this.emitScore();
+
+      this.stateMachine.reset();
       this.emitRoom();
     }
   }
 
   public tick(): void {
     if (this.stateMachine.isExpired()) {
-      this.stateMachine.reset();
       this.emitScore();
+
+      this.stateMachine.reset();
       this.emitRoom();
     }
   }
