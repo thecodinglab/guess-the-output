@@ -48,6 +48,7 @@ export class Game {
     if (this.stateMachine.allAnswered()) {
       this.stateMachine.reset();
       this.emitScore();
+      this.emitRoom();
     }
   }
 
@@ -55,6 +56,7 @@ export class Game {
     if (this.stateMachine.isExpired()) {
       this.stateMachine.reset();
       this.emitScore();
+      this.emitRoom();
     }
   }
 
