@@ -18,7 +18,28 @@ steps:
         from_secret: github_token
 
 ---
+kind: pipeline
+type: ssh
+name: deploy
+
+server:
+  host: 185.220.157.253
+  user: ubuntu
+  ssh_key:
+    from_secret: deploy_key
+
+steps:
+  - name: deploy
+    commands:
+      - cd config
+      - docker compose pull
+      - docker compose up -d
+
+depends_on:
+  - publish-backend
+
+---
 kind: signature
-hmac: b56c6dda9ef04132fcee13f524116dcabecb7ed7008ce1911ffb5f207842ea15
+hmac: 6b0304429cdcc4a6ab2680fceedf79d1832f729cbf0dc49f459c07638f65f356
 
 ...
