@@ -9,6 +9,8 @@
   }
 </script>
 
+<p class="text-gray-400 mb-4">{lobby.room}</p>
+
 {#if answer}
   <div class="bg-gray-800 text-xl mb-8">
     {#if answer[player?.id] === 'correct'}
