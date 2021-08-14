@@ -31,18 +31,17 @@ server:
 steps:
   - name: deploy
     commands:
-      - id
-      - pwd
-      
       - cd config
       - docker compose pull
       - docker compose up -d
+    environment:
+      HOME: /home/ubuntu
 
 depends_on:
   - publish-backend
 
 ---
 kind: signature
-hmac: 907c6dbeae45d8a2c5ad396f0efa1fa5143a527910862406b16d7e67b02adeca
+hmac: 7700f429ab380a2c088a259db66c8c1a0a944a0ca85bf679fc3170344da272ae
 
 ...
