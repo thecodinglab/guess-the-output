@@ -31,6 +31,9 @@ server:
 steps:
   - name: deploy
     commands:
+      - id
+      - pwd
+      
       - cd config
       - docker compose pull
       - docker compose up -d
@@ -40,6 +43,6 @@ depends_on:
 
 ---
 kind: signature
-hmac: 6b0304429cdcc4a6ab2680fceedf79d1832f729cbf0dc49f459c07638f65f356
+hmac: 907c6dbeae45d8a2c5ad396f0efa1fa5143a527910862406b16d7e67b02adeca
 
 ...
