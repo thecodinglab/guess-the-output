@@ -10,6 +10,8 @@ export interface ClientJoinEvent {
 export interface ServerRoomEvent {
   room: string;
   players: Player[];
+
+  total: number;
 }
 
 export interface ClientReadyEvent {

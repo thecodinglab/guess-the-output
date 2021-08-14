@@ -9,11 +9,15 @@ export class StateMachine {
 
   public current: Question = null;
   public answers: Record<string, Answer> = {};
-  private expiry: moment.Moment = null;
+  public expiry: moment.Moment = null;
+
+  public questionCount: number;
 
   constructor(
     private questions: Question[]
-  ) {}
+  ) {
+    this.questionCount = this.questions.length;
+  }
 
   public find(id: string): Player|null {
     return this.players.find((player: Player) => player.id === id);

@@ -72,6 +72,7 @@ export class Game {
     const event: ServerRoomEvent = {
       room: this.id,
       players: players,
+      total: this.stateMachine.questionCount,
     }
 
     this.server.emit(SocketEvent.serverRoom, event);
