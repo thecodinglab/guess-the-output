@@ -8,6 +8,7 @@ steps:
     image: plugins/docker
     settings:
       context: backend
+      dockerfile: backend/Dockerfile
       registry: ghcr.io
       repo: thecodinglab/guess-the-output/backend
       tags: latest
