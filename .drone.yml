@@ -1,0 +1,23 @@
+---
+kind: pipeline
+type: kubernetes
+name: publish-backend
+
+steps:
+  - name: publish
+    image: plugins/docker
+    settings:
+      context: backend
+      registry: ghcr.io
+      repo: thecodinglab/guess-the-output/backend
+      tags: latest
+      username:
+        from_secret: github_username
+      password:
+        from_secret: github_token
+
+---
+kind: signature
+hmac: b56c6dda9ef04132fcee13f524116dcabecb7ed7008ce1911ffb5f207842ea15
+
+...
