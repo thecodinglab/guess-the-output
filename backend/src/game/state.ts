@@ -1,20 +1,15 @@
 import { AnswerCorrectness, RoundScores } from "../interfaces";
 import { Player } from "../entities/player";
 import { Answer, Question } from "../entities/question";
-
-export enum State {
-  lobby,
-  active,
-  finished
-}
+import * as moment from "moment";
 
 export class StateMachine {
 
-  // public state: State = State.lobby;
   public players: Player[] = new Array();
 
   public current: Question = null;
   public answers: Record<string, Answer> = {};
+  private expiry: moment.Moment = null;
 
   constructor(
     private questions: Question[]
@@ -61,8 +56,20 @@ export class StateMachine {
 
     this.current = question[0];
     this.answers = {};
+    this.expiry = moment().add(10, 'seconds');
 
     return true;
+  }
+
+  public reset(): void {
+    this.current = null;
+    this.answers = {};
+
+    this.markAllNotReady();
+  }
+
+  public isExpired(): boolean {
+    return this.current && !this.allAnswered() && moment().isAfter(this.expiry);
   }
 
   public allAnswered(): boolean {

@@ -2,29 +2,22 @@ import { BroadcastOperator } from "socket.io";
 import { DefaultEventsMap } from "socket.io/dist/typed-events";
 import { StateMachine } from "./state";
 import { Player } from "../entities/player";
-import { Answer } from "../entities/question";
+import { Answer, QuestionRepository } from "../entities/question";
 
 import { ServerFinishEvent, ServerQuestionEvent, ServerRoomEvent, SocketEvent, FinalScores, AnswerCorrectness, ServerScoreEvent } from "../interfaces";
 
 export class Game {
 
-  private stateMachine: StateMachine = new StateMachine([
-    {
-      id: 'awd',
-      question: '',
-      language: 'javascript',
-      snippet: `console.log('Hello, World!')`,
-      options: [
-        { id: 'awd', value: 'Hello, World!' },
-      ],
-      correct: { id: 'awd', value: 'Hello, World!' },
-    }
-  ]);
+  private stateMachine: StateMachine;
 
   constructor(
     public id: string,
-    private server: BroadcastOperator<DefaultEventsMap>
-  ) {}
+    private server: BroadcastOperator<DefaultEventsMap>,
+    questionRepo: QuestionRepository,
+  ) {
+    const questions = questionRepo.list();
+    this.stateMachine = new StateMachine(questions);
+  }
 
   public join(player: Player): void {
     this.stateMachine.join(player);
@@ -32,6 +25,11 @@ export class Game {
   }
 
   public ready(id: string): void {
+    if (this.stateMachine.current) {
+      // current question is still in progress
+      return;
+    }
+
     this.stateMachine.markReady(id);
     this.emitRoom();
 
@@ -48,6 +46,14 @@ export class Game {
     this.stateMachine.answer(id, answer);
 
     if (this.stateMachine.allAnswered()) {
+      this.stateMachine.reset();
+      this.emitScore();
+    }
+  }
+
+  public tick(): void {
+    if (this.stateMachine.isExpired()) {
+      this.stateMachine.reset();
       this.emitScore();
     }
   }

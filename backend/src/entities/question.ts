@@ -1,6 +1,5 @@
 export interface Question {
   id: string;
-  question: string;
 
   language: string;
   snippet: string;
@@ -16,6 +15,16 @@ export interface Answer {
 
 export class QuestionRepository {
   list(): Question[] {
-    return [];
+    return [
+      {
+        id: 'awd',
+        language: 'javascript',
+        snippet: `console.log('Hello, World!')`,
+        options: [
+          { id: 'awd', value: 'Hello, World!' },
+        ],
+        correct: { id: 'awd', value: 'Hello, World!' },
+      }
+    ];
   }
 }

@@ -1,5 +1,6 @@
 import { BroadcastOperator, Namespace, Server } from "socket.io";
 import { DefaultEventsMap } from "socket.io/dist/typed-events";
+import { QuestionRepository } from "../entities/question";
 import { Game } from "./game";
 
 export class GameManager {
@@ -7,7 +8,9 @@ export class GameManager {
 
   constructor(
     private server: Server
-  ) {}
+  ) {
+    setInterval(this.tick.bind(this), 500);
+  }
 
   public create(): Game {
     let id = this.generateID();
@@ -16,14 +19,22 @@ export class GameManager {
     }
 
     const namespace: BroadcastOperator<DefaultEventsMap> = this.server.in(id);
+    const questionRepo = new QuestionRepository();
 
-    const game = new Game(id, namespace);
+    const game = new Game(id, namespace, questionRepo);
     this.games[id] = game;
     return game;
   }
 
   public select(id: string): Game | null {
     return this.games[id];
+  }
+
+  private tick(): void {
+    for (const id in this.games) {
+      const game = this.games[id];
+      game.tick();
+    }
   }
 
   private generateID(): string {
