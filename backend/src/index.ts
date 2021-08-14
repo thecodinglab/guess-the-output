@@ -5,7 +5,11 @@ import { AddressInfo } from "net";
 const port = process.env.PORT || 3000;
 
 const server = createServer();
-const io = new Server(server, {});
+const io = new Server(server, {
+  cors: {
+    origin: '*',
+  },
+});
 
 const shutdown = () => {
   console.log('shutting down application...');
