@@ -1,4 +1,5 @@
 export interface ClientCreateEvent {
+  username: string;
 }
 
 export interface ClientJoinEvent {
