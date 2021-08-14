@@ -59,6 +59,7 @@ steps:
   - name: deploy
     commands:
       - cd config
+      - cp Caddyfile /srv/Caddyfile
       - docker compose pull
       - docker compose up -d
     environment:
@@ -74,6 +75,6 @@ trigger:
 
 ---
 kind: signature
-hmac: 672f67f1066ff423039a7b5a62afe573d6fb64c0f3e63ca878c85e45c988558f
+hmac: cd29cfcf267633324f21940d1be12ea156ff57a24a29892e77db43b9032b3da8
 
 ...

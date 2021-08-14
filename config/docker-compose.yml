@@ -6,7 +6,7 @@ services:
     image: caddy:2
     restart: unless-stopped
     volumes:
-      - ./Caddyfile:/etc/caddy/Caddyfile
+      - /srv/Caddyfile:/etc/caddy/Caddyfile
     ports:
       - 80:80
       - 443:443

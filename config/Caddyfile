@@ -6,6 +6,8 @@ guess-the-output.thecodinglab.dev {
     header_up X-Real-IP {remote}
   }
 
+  reverse_proxy * frontend:80
+
   log {
     output stdout
     level DEBUG
